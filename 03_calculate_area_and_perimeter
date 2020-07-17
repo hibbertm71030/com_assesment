@@ -65,6 +65,7 @@ if shape == "circle":
 if shape == "parallelogram":
     base = number_only("what is the base? (please use same units for base and height) ")
     side = number_only("what is the side length? (please use same units for base and side) ")
-    print("area = ",int(base) * int(side))
+    height = number_only("what is the height? (please use same units for base and height) ")
+    print("area = ",int(height) * int(side))
     print("perimeter =",int(base) + int(base) + int(side) + int(side))
 
