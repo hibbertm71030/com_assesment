@@ -1,0 +1,70 @@
+# list of shapes
+
+list_of_shapes = ["rectangle","square", "circle", "parallelogram"]
+
+# imports
+
+import numbers
+import math
+
+
+# shape checker function
+
+def shape_checker(question):
+    error = "please use one of the following: rectangle, square, circle, parallelogram "
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        if response.lower() in list_of_shapes:
+            return response.lower()
+
+        elif response.lower() not in list_of_shapes:
+            print(error)
+            continue
+
+# number only function
+def number_only(question):
+    error = "please use a number"
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        for letter in response:
+
+            if letter.isdigit():
+                return response
+
+            elif not letter.isdigit():
+                print(error)
+                break
+
+
+# ask user for shape
+shape = shape_checker("What shape do you want to calculate for? ")
+
+# ask user for dimensions
+if shape == "rectangle":
+    base = number_only("what is the base? (please use same units for base and height) ")
+    height = number_only("what is the height? (please use same units for base and height) ")
+    print("area = ",int(base) * int(height))
+    print("perimeter =",int(base) + int(base) + int(height) + int(height))
+
+if shape == "square":
+    length = number_only("what is the length of the a side? ")
+    print("area = ",int(length) * int(length))
+    print("perimeter =",int(length) * 4)
+
+if shape == "circle":
+    radius = number_only("what is the radius? ")
+    print("area =",int(radius) * int(radius) * (math.pi))
+    print("perimeter = ",int(radius) * 2 * (math.pi))
+
+if shape == "parallelogram":
+    base = number_only("what is the base? (please use same units for base and height) ")
+    side = number_only("what is the side length? (please use same units for base and side) ")
+    print("area = ",int(base) * int(side))
+    print("perimeter =",int(base) + int(base) + int(side) + int(side))
+
