@@ -1,0 +1,93 @@
+# list of shapes
+
+list_of_shapes = ["rectangle", "square", "circle", "parallelogram"]
+
+# imports
+
+import math
+
+
+# shape checker function
+
+def shape_checker(question):
+    error = "please use one of the following: rectangle, square, circle, parallelogram "
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        if response.lower() in list_of_shapes:
+            return response.lower()
+
+        elif response.lower() not in list_of_shapes:
+            print(error)
+            continue
+
+
+# number only function
+def number_only(question):
+    error = "please use a number"
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        for letter in response:
+
+            if letter.isdigit():
+                return response
+
+            elif not letter.isdigit():
+                print(error)
+                break
+
+
+# main routine
+# calculation lists
+calculation_list = []
+calculation = []
+
+# ask user for shape
+shape = shape_checker("What shape do you want to calculate for? ")
+
+# ask user for dimensions
+if shape == "rectangle":
+    base = number_only("what is the base? (please use same units for base and height) ")
+    height = number_only("what is the height? (please use same units for base and height) ")
+    # calculate area and perimeter
+    area = "area = ", int(base) * int(height)
+    perimeter = "perimeter =", int(base) + int(base) + int(height) + int(height)
+    # add to calculation list
+    answer = area, perimeter
+    calculation.append(shape)
+    calculation.append(answer)
+    print(calculation)
+
+
+if shape == "square":
+    length = number_only("what is the length of the a side? ")
+    area = "area = ", int(length) * int(length)
+    perimeter = "perimeter =", int(length) * 4
+    answer = area, perimeter
+    calculation.append(shape)
+    calculation.append(answer)
+
+if shape == "circle":
+    radius = number_only("what is the radius? ")
+    area = "area =", int(radius) * int(radius) * (math.pi)
+    perimeter = "perimeter = ", int(radius) * 2 * (math.pi)
+    answer = area, perimeter
+    calculation.append(shape)
+    calculation.append(answer)
+
+if shape == "parallelogram":
+    base = number_only("what is the base? (please use same units for base and height) ")
+    side = number_only("what is the side length? (please use same units for base and side) "
+                       "(if you only want the perimeter type 0)")
+    height = number_only("what is the height? (please use same units for base and height) "
+                         "(if you only want the area type 0)")
+    area = "area = ", int(height) * int(base)
+    perimeter = "perimeter =", int(base) + int(base) + int(side) + int(side)
+    answer = area, perimeter
+    calculation.append(shape)
+    calculation.append(answer)
