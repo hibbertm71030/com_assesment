@@ -71,6 +71,7 @@ if shape == "square":
     answer = area, perimeter
     calculation.append(shape)
     calculation.append(answer)
+    print(calculation)
 
 if shape == "circle":
     radius = number_only("what is the radius? ")
@@ -79,6 +80,7 @@ if shape == "circle":
     answer = area, perimeter
     calculation.append(shape)
     calculation.append(answer)
+    print(calculation)
 
 if shape == "parallelogram":
     base = number_only("what is the base? (please use same units for base and height) ")
@@ -91,3 +93,4 @@ if shape == "parallelogram":
     answer = area, perimeter
     calculation.append(shape)
     calculation.append(answer)
+    print(calculation)
