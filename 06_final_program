@@ -1,0 +1,143 @@
+# list of shapes
+
+list_of_shapes = ["rectangle", "square", "circle", "parallelogram"]
+
+# imports
+
+import math
+import pprint
+
+# calculation lists
+calculation_list = []
+calculation = []
+
+
+# shape checker function
+
+def shape_checker(question):
+    error = "please use one of the following: rectangle, square, circle, parallelogram "
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        if response.lower() in list_of_shapes:
+            return response.lower()
+
+        elif response.lower() not in list_of_shapes:
+            print(error)
+            continue
+
+
+# number only function
+def number_only(question):
+    error = "please use a number"
+
+    valid = False
+    while not valid:
+        response = input(question)
+
+        for letter in response:
+
+            if letter.isdigit():
+                return response
+
+            elif not letter.isdigit():
+                print(error)
+                break
+
+# end code function
+
+
+def end_code(question):
+
+    valid = False
+    while not valid:
+        error = "please enter yes or no"
+        response = input(question)
+
+        if response == "yes":
+            calculation_list.append(calculation)
+            print()
+            return response
+
+        elif response == "no":
+            calculation_list.append(calculation)
+            print("")
+            print("")
+            print("CALCULATION HISTORY:")
+            print("")
+            for thiscalc in calculation_list:
+                print(thiscalc, sep='\n')
+
+            break
+
+        elif response != "yes" or "no":
+            print(error)
+            continue
+
+
+# main routine
+cont = "yes"
+# Loops while program
+while cont == "yes":
+    # Resets the `current_calculation` variable
+    calculation = []
+
+
+    # ask user for shape
+    shape = shape_checker("What shape do you want to calculate for? ")
+
+    # ask user for dimensions
+    if shape == "rectangle":
+        base = number_only("what is the base? (please use same units for base and height) ")
+        height = number_only("what is the height? (please use same units for base and height) ")
+        # calculate area and perimeter
+        area = "area = {:.2f}".format(float(base) * float(height))
+        perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(height) + float(height))
+        # add to calculation list
+        answer = area, perimeter
+        calculation.append(shape)
+        calculation.append(answer)
+        print(calculation)
+        print()
+
+    if shape == "square":
+        length = number_only("what is the length of the a side? ")
+        area = "area = {:.2f} ".format(float(length) * float(length))
+        perimeter = "perimeter = {:.2f} ".format(float(length) * 4)
+        answer = area, perimeter
+        calculation.append(shape)
+        calculation.append(answer)
+        print(calculation)
+        print()
+
+    if shape == "circle":
+        radius = number_only("what is the radius? ")
+        area = "area = {:.2f}".format(float(radius) * float(radius) * (math.pi))
+        perimeter = "perimeter = {:.2f}".format(float(radius) * 2 * (math.pi))
+        answer = area, perimeter
+        calculation.append(shape)
+        calculation.append(answer)
+        print(calculation)
+        print()
+
+    if shape == "parallelogram":
+        base = number_only("what is the base? (please use same units for base and height) ")
+        side = number_only("what is the side length? (please use same units for base and side) "
+                           "(if you only want the perimeter type 0) ")
+        height = number_only("what is the height? (please use same units for base and height) "
+                             "(if you only want the area type 0) ")
+        area = "area = {:.2f}".format(float(height) * float(base))
+        perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
+        answer = area, perimeter
+        calculation.append(shape)
+        calculation.append(answer)
+        print(calculation)
+        print()
+
+    cont = end_code("Would you like to calculate for another shape? (type yes or no) ")
+
+
+
+
