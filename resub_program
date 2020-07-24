@@ -3,25 +3,26 @@
 # imports
 
 import math
-import pprint
 
 
 
-# shape checker function
-
+# shape checker
 def shape_checker(question):
-    error = "please use one of the following: rectangle, square, circle, parallelogram "
-
     valid = False
     while not valid:
-        response = input(question)
 
-        if response.lower() in list_of_shapes:
-            return response.lower()
+        response = input(question).lower()
 
-        elif response.lower() not in list_of_shapes:
-            print(error)
-            continue
+        if response in list_of_shapes:
+            return response
+
+        else:
+            for item in list_of_shapes:
+                if response == item[0]:
+                    return item
+
+        print("please use one of the following: rectangle, square, circle, parallelogram ")
+
 
 
 # number only function
@@ -40,6 +41,8 @@ def number_only(question):
             elif not letter.isdigit():
                 print(error)
                 break
+
+
 
 # end code function
 
@@ -71,20 +74,76 @@ def end_code(question):
             print(error)
             continue
 
-def area_or_perimeter(question):
-    correct_answers = ["area", "perimeter", "both"]
 
+
+
+
+
+# string checker 2
+def string_checker2(question):
     valid = False
+    acceptable_answers = ["yes", "no"]
     while not valid:
-        error = "please enter perimeter or area"
-        response = input(question)
 
-        if response not in correct_answers:
-            print(error)
+        response = input(question).lower()
+
+        if response in acceptable_answers:
             return response
-        elif response == area:
-            base = number_only("what is the base? (please use same units for base and height) ")
 
+        else:
+            for item in acceptable_answers:
+                # checks if response is the first letter of an item in the list
+                if response == item[0]:
+                    continue
+
+        if response not in acceptable_answers:
+            print("please enter yes or no")
+
+        elif response == "yes":
+            calculation_list.append(calculation)
+            print()
+            return response
+
+        elif response == "no":
+            calculation_list.append(calculation)
+            print("")
+            print("")
+            print("CALCULATION HISTORY:")
+            print("")
+            for thiscalc in calculation_list:
+                print(thiscalc, sep='\n')
+
+            break
+
+        elif response != "yes" or "no":
+            print(error)
+            continue
+
+
+
+
+
+
+
+# area or perimeter checker
+def string_checker3(question):
+    valid = False
+    acceptable_answers = ["area", "perimeter", "both"]
+    while not valid:
+
+        response = input(question).lower()
+
+        if response in acceptable_answers:
+            return response
+
+        else:
+            for item in acceptable_answers:
+                # checks if response is the first letter of an item in the list
+                if response == item[0]:
+                    # note: returns the entire response rather than just the first letter
+                    return item
+
+        print("Please enter either area or perimeter.")
 
 
 
@@ -144,22 +203,38 @@ while cont == "yes":
         print(calculation)
         print()
 
-    elif shape == "parallelogram":
-        area_or_perimeter("Do you want to calculate for area or perimeter or both? ")
-        base = number_only("what is the base? (please use same units for base and height) ")
-        side = number_only("what is the side length? (please use same units for base and side) "
-                           "(if you only want the perimeter type 0) ")
-        height = number_only("what is the height? (please use same units for base and height) "
-                             "(if you only want the area type 0) ")
-        area = "area = {:.2f}".format(float(height) * float(base))
-        perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
-        answer = area, perimeter
-        calculation.append(shape)
-        calculation.append(answer)
-        print(calculation)
-        print()
+    elif shape == "parallelogram".lower():
+        ans = area_or_perimeter and string_checker3("Do you want to calculate for area or perimeter or both? ")
+        if ans == "area":
+            base = number_only("what is the base? (please use same units for base and height) ")
+            height = number_only("what is the height? (please use same units for base and height) ")
+            answer = "area = {:.2f}".format(float(height) * float(base))
+            calculation.append(shape)
+            calculation.append(answer)
+            print(calculation)
+            print()
+        elif ans == "perimeter".lower():
+            base = number_only("what is the base? (please use same units for base and height) ")
+            side = number_only("what is the side length? (please use same units for base and side) ")
+            answer = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
+            calculation.append(shape)
+            calculation.append(answer)
+            print(calculation)
+            print()
+        elif ans == "both".lower():
+            base = number_only("what is the base? (please use same units for base and height) ")
+            side = number_only("what is the side length? (please use same units for base and side) ")
+            height = number_only("what is the height? (please use same units for base and height) ")
+            area = "area = {:.2f}".format(float(height) * float(base))
+            perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
+            answer = area, perimeter
+            calculation.append(shape)
+            calculation.append(answer)
+            print(calculation)
+            print()
 
-    cont = end_code("Would you like to calculate for another shape? (type yes or no) ")
+
+    cont = string_checker2("Would you like to calculate for another shape? (type yes or no) ")
 
 
 
