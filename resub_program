@@ -103,6 +103,21 @@ def area_or_perimeter(question):
         print("Please enter either area or perimeter.")
 
 
+# not blank function
+def not_blank(question):
+    valid = False
+    while not valid:
+        response = input(question)
+        error = "please enter a unit"
+
+        if response == "":
+            print(error)
+        elif response != "":
+            return response
+
+
+
+
 
 
 
@@ -127,6 +142,7 @@ while cont == "yes" or cont == "y" :
 
     # ask user for shape
     shape = shape_checker("What shape do you want to calculate for? ")
+    units = not_blank("what are the units? ")
 
     # calculates area and perimeter for rectangle and adds answer to list
     if shape == "rectangle":
@@ -134,17 +150,17 @@ while cont == "yes" or cont == "y" :
         # asks for base and height
         base = number_only("what is the base? ")
         height = number_only("what is the height? ")
-        
+
 
         # calculate area and perimeter through number only function
-        area = "area = {:.2f}".format(float(base) * float(height))
-        perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(height) + float(height))
+        area = "area = {:.2f} {}^2".format(float(base) * float(height), units)
+        perimeter = "perimeter = {:.2f} {}".format(float(base) + float(base) + float(height) + float(height), units)
 
-        # add to calculation list
+        # add to calculation list and prints shape: area perimeter
         answer = area, perimeter
-        calculation.append(shape)
-        calculation.append(answer)
-        print(calculation)
+        neat_ans = "{}:  {} {}".format(shape, area, perimeter)
+        calculation.append(neat_ans)
+        print(neat_ans)
         print()
 
 
@@ -155,14 +171,14 @@ while cont == "yes" or cont == "y" :
         length = number_only("what is the length of the a side? ")
 
         # calculates area and perimeter
-        area = "area = {:.2f} ".format(float(length) * float(length))
-        perimeter = "perimeter = {:.2f} ".format(float(length) * 4)
+        area = "area = {:.2f} {}^2 ".format(float(length) * float(length), units)
+        perimeter = "perimeter = {:.2f} {}".format(float(length) * 4, units)
 
         # adds answer to calculation list
         answer = area, perimeter
-        calculation.append(shape)
-        calculation.append(answer)
-        print(calculation)
+        neat_ans = "{}:  {} {}".format(shape, area, perimeter)
+        calculation.append(neat_ans)
+        print(neat_ans)
         print()
 
     # calculates area and perimeter for circle and adds answer to list
@@ -172,14 +188,14 @@ while cont == "yes" or cont == "y" :
         radius = number_only("what is the radius? ")
 
         # calculates area and perimeter
-        area = "area = {:.2f}".format(float(radius) * float(radius) * (math.pi))
-        perimeter = "perimeter = {:.2f}".format(float(radius) * 2 * (math.pi))
+        area = "area = {:.2f} {}^2".format(float(radius) * float(radius) * (math.pi), units)
+        perimeter = "perimeter = {:.2f} {}".format(float(radius) * 2 * (math.pi), units)
 
         # adds answer to calculation list
         answer = area, perimeter
-        calculation.append(shape)
-        calculation.append(answer)
-        print(calculation)
+        neat_ans = "{}:  {} {}".format(shape, area, perimeter)
+        calculation.append(neat_ans)
+        print(neat_ans)
         print()
 
 
@@ -191,41 +207,41 @@ while cont == "yes" or cont == "y" :
 
         # if answer = area ask for base and height
         if ans == "area":
-            base = number_only("what is the base? (please use same units for base and height) ")
-            height = number_only("what is the height? (please use same units for base and height) ")
+            base = number_only("what is the base? ")
+            height = number_only("what is the height? ")
 
             # calculates area and adds it to calculation list
-            answer = "area = {:.2f}".format(float(height) * float(base))
-            calculation.append(shape)
-            calculation.append(answer)
-            print(calculation)
+            area = "area = {:.2f} {}^2".format(float(height) * float(base), units)
+            neat_ans = "{}:  {}".format(shape, area,)
+            calculation.append(neat_ans)
+            print(neat_ans)
             print()
 
         # if answer = perimeter ask for base and side length
         elif ans == "perimeter".lower():
-            base = number_only("what is the base? (please use same units for base and height) ")
-            side = number_only("what is the side length? (please use same units for base and side) ")
+            base = number_only("what is the base? ")
+            side = number_only("what is the side length? ")
 
             # calculates perimeter and adds it to calculation list
-            answer = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
-            calculation.append(shape)
-            calculation.append(answer)
-            print(calculation)
+            perimeter = "perimeter = {:.2f} {}".format(float(base) + float(base) + float(side) + float(side), units)
+            neat_ans = "{}:  {}".format(shape, perimeter)
+            calculation.append(neat_ans)
+            print(neat_ans)
             print()
 
         # if answer = both ask for base, height, and side length
         elif ans == "both".lower():
-            base = number_only("what is the base? (please use same units for base and height) ")
-            side = number_only("what is the side length? (please use same units for base and side) ")
-            height = number_only("what is the height? (please use same units for base and height) ")
+            base = number_only("what is the base? ")
+            side = number_only("what is the side length? ")
+            height = number_only("what is the height? ")
 
             # calculates area and perimeter and adds it to calculation list
-            area = "area = {:.2f}".format(float(height) * float(base))
-            perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
+            area = "area = {:.2f} {}^2".format(float(height) * float(base), units)
+            perimeter = "perimeter = {:.2f} {}^2".format(float(base) + float(base) + float(side) + float(side), units)
             answer = area, perimeter
-            calculation.append(shape)
-            calculation.append(answer)
-            print(calculation)
+            neat_ans = "{}:  {} {}".format(shape, area, perimeter)
+            calculation.append(neat_ans)
+            print(neat_ans)
             print()
 
     # asks if they want to calculate for another shape through end code function, which will loop program
