@@ -12,10 +12,10 @@ def shape_checker(question):
     while not valid:
 
         response = input(question).lower()
-
+        # checks if response is in list of shapes
         if response in list_of_shapes:
             return response
-
+        # checks if input is the first letter of one of the shape
         else:
             for item in list_of_shapes:
                 if response == item[0]:
@@ -34,10 +34,10 @@ def number_only(question):
         response = input(question)
 
         for letter in response:
-
+        # checks if input is a number, returns response
             if letter.isdigit():
                 return response
-
+            # if inputs not a number prints error
             elif not letter.isdigit():
                 print(error)
                 break
@@ -46,20 +46,23 @@ def number_only(question):
 
 # end code function
 
-
 def end_code(question):
 
     valid = False
     while not valid:
         error = "please enter yes or no"
         response = input(question)
+        acceptable_answers = ["yes", "no", "y", "n"]
 
-        if response == "yes":
+        # if response is yes, adds calculation to calculation_list (the history list)
+        if response.lower() == "yes"[0]:
             calculation_list.append(calculation)
             print()
             return response
 
-        elif response == "no":
+        # if response is no, adds calculation to calculation list
+        # and prints calculation list with each calculation spereated by a blank line
+        elif response.lower() == "no"[0]:
             calculation_list.append(calculation)
             print("")
             print("")
@@ -70,77 +73,31 @@ def end_code(question):
 
             break
 
-        elif response != "yes" or "no":
+        # if response not yes or no prints error
+        elif response not in acceptable_answers:
             print(error)
             continue
-
-
-
-
-
-
-# string checker 2
-def string_checker2(question):
-    valid = False
-    acceptable_answers = ["yes", "no"]
-    while not valid:
-
-        response = input(question).lower()
-
-        if response in acceptable_answers:
-            return response
-
-        else:
-            for item in acceptable_answers:
-                # checks if response is the first letter of an item in the list
-                if response == item[0]:
-                    continue
-
-        if response not in acceptable_answers:
-            print("please enter yes or no")
-
-        elif response == "yes":
-            calculation_list.append(calculation)
-            print()
-            return response
-
-        elif response == "no":
-            calculation_list.append(calculation)
-            print("")
-            print("")
-            print("CALCULATION HISTORY:")
-            print("")
-            for thiscalc in calculation_list:
-                print(thiscalc, sep='\n')
-
-            break
-
-        elif response != "yes" or "no":
-            print(error)
-            continue
-
-
 
 
 
 
 
 # area or perimeter checker
-def string_checker3(question):
+def area_or_perimeter(question):
     valid = False
     acceptable_answers = ["area", "perimeter", "both"]
     while not valid:
 
         response = input(question).lower()
-
+        # if response in list return response
         if response in acceptable_answers:
             return response
 
         else:
             for item in acceptable_answers:
-                # checks if response is the first letter of an item in the list
+                # checks if response is the first letter of area, perimeter, or both
                 if response == item[0]:
-                    # note: returns the entire response rather than just the first letter
+                    # returns response (returns whole item not just letter)
                     return item
 
         print("Please enter either area or perimeter.")
@@ -158,24 +115,31 @@ list_of_shapes = ["rectangle", "square", "circle", "parallelogram"]
 calculation_list = []
 calculation = []
 
+
 # main routine
-cont = "yes"
-# Loops while program
-while cont == "yes":
-    # Resets the `current_calculation` variable
+
+cont = "yes" or "y"
+# Loops program
+while cont == "yes" or cont == "y" :
+    # Resets the calculation variable
     calculation = []
 
 
     # ask user for shape
     shape = shape_checker("What shape do you want to calculate for? ")
 
-    # ask user for dimensions
+    # calculates area and perimeter for rectangle and adds answer to list
     if shape == "rectangle":
-        base = number_only("what is the base? (please use same units for base and height) ")
-        height = number_only("what is the height? (please use same units for base and height) ")
-        # calculate area and perimeter
+
+        # asks for base and height
+        base = number_only("what is the base? ")
+        height = number_only("what is the height? ")
+        
+
+        # calculate area and perimeter through number only function
         area = "area = {:.2f}".format(float(base) * float(height))
         perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(height) + float(height))
+
         # add to calculation list
         answer = area, perimeter
         calculation.append(shape)
@@ -183,48 +147,79 @@ while cont == "yes":
         print(calculation)
         print()
 
+
+    # calculates area and perimeter for square and adds answer to list
     elif shape == "square":
+
+        # asks for length of a side through number only function
         length = number_only("what is the length of the a side? ")
+
+        # calculates area and perimeter
         area = "area = {:.2f} ".format(float(length) * float(length))
         perimeter = "perimeter = {:.2f} ".format(float(length) * 4)
+
+        # adds answer to calculation list
         answer = area, perimeter
         calculation.append(shape)
         calculation.append(answer)
         print(calculation)
         print()
 
+    # calculates area and perimeter for circle and adds answer to list
     elif shape == "circle":
+
+        # asks for radius through number only function
         radius = number_only("what is the radius? ")
+
+        # calculates area and perimeter
         area = "area = {:.2f}".format(float(radius) * float(radius) * (math.pi))
         perimeter = "perimeter = {:.2f}".format(float(radius) * 2 * (math.pi))
+
+        # adds answer to calculation list
         answer = area, perimeter
         calculation.append(shape)
         calculation.append(answer)
         print(calculation)
         print()
 
+
+    # calculates area, perimeter or both for parallelogram and adds answer to list
     elif shape == "parallelogram".lower():
-        ans = area_or_perimeter and string_checker3("Do you want to calculate for area or perimeter or both? ")
+
+        # asks if user wants to calculate area, perimeter, or both
+        ans = area_or_perimeter("Do you want to calculate for area or perimeter or both? ")
+
+        # if answer = area ask for base and height
         if ans == "area":
             base = number_only("what is the base? (please use same units for base and height) ")
             height = number_only("what is the height? (please use same units for base and height) ")
+
+            # calculates area and adds it to calculation list
             answer = "area = {:.2f}".format(float(height) * float(base))
             calculation.append(shape)
             calculation.append(answer)
             print(calculation)
             print()
+
+        # if answer = perimeter ask for base and side length
         elif ans == "perimeter".lower():
             base = number_only("what is the base? (please use same units for base and height) ")
             side = number_only("what is the side length? (please use same units for base and side) ")
+
+            # calculates perimeter and adds it to calculation list
             answer = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
             calculation.append(shape)
             calculation.append(answer)
             print(calculation)
             print()
+
+        # if answer = both ask for base, height, and side length
         elif ans == "both".lower():
             base = number_only("what is the base? (please use same units for base and height) ")
             side = number_only("what is the side length? (please use same units for base and side) ")
             height = number_only("what is the height? (please use same units for base and height) ")
+
+            # calculates area and perimeter and adds it to calculation list
             area = "area = {:.2f}".format(float(height) * float(base))
             perimeter = "perimeter = {:.2f}".format(float(base) + float(base) + float(side) + float(side))
             answer = area, perimeter
@@ -233,8 +228,8 @@ while cont == "yes":
             print(calculation)
             print()
 
-
-    cont = string_checker2("Would you like to calculate for another shape? (type yes or no) ")
+    # asks if they want to calculate for another shape through end code function, which will loop program
+    cont = end_code("Would you like to calculate for another shape? (type yes or no) ")
 
 
 
