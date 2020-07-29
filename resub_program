@@ -55,14 +55,14 @@ def end_code(question):
         acceptable_answers = ["yes", "no", "y", "n"]
 
         # if response is yes, adds calculation to calculation_list (the history list)
-        if response.lower() == "yes"[0]:
+        if response.lower() == "yes"[0] or response.lower() == "yes":
             calculation_list.append(calculation)
             print()
             return response
 
         # if response is no, adds calculation to calculation list
         # and prints calculation list with each calculation spereated by a blank line
-        elif response.lower() == "no"[0]:
+        elif response.lower() == "no"[0] or response.lower() == "no":
             calculation_list.append(calculation)
             print("")
             print("")
@@ -135,7 +135,7 @@ calculation = []
 
 cont = "yes" or "y"
 # Loops program
-while cont == "yes" or cont == "y" :
+while cont == "yes" or cont == "y":
     # Resets the calculation variable
     calculation = []
 
